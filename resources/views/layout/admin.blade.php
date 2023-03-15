@@ -12,11 +12,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar" style="background-color: #152A38;">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="#">PENMAS CIGOMBONG</a>
+            <a class="navbar-brand ps-3 text-white" href="#">PENMAS CIGOMBONG</a>
             <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 text-white" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
@@ -25,10 +25,10 @@
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li>
-                            <form action="logoutAdmin" method="POST">
+                            <form action="/admin/logoutAdmin" method="POST">
                                 @csrf
                                 <button type="submit" class="dropdown-item">Logout</button>
                             </form>
@@ -39,27 +39,27 @@
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <nav class="sb-sidenav accordion sb-sidenav" id="sidenavAccordion" style="background-color: #152A38;">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link" href="/dashboard">
+                            <a class="nav-link text-white" href="/admin/dashboard">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
-                            <a class="nav-link" href="/tanggapan">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <a class="nav-link text-white" href="/admin/tanggapan">
+                                <div class="sb-nav-link-icon"><i class="fas fa-highlighter"></i></div>
                                 Tanggapan
                             </a>
-                            <a class="nav-link" href="/laporan">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Generate Laporan
+                            <a class="nav-link text-white" href="/admin/laporan">
+                                <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
+                                Buat Laporan
                             </a>
-                            <a class="nav-link" href="/petugas">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <a class="nav-link text-white" href="/admin/petugas">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Petugas
                             </a>
-                            <a class="nav-link" href="/masyarakat">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <a class="nav-link text-white" href="/admin/masyarakat">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Masyarakat
                             </a>
                         </div>

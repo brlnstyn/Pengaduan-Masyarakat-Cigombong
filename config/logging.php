@@ -113,6 +113,62 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'register-masyarakat' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/masyarakat/register-masyarakat.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+        ],
+
+        'login-masyarakat' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/masyarakat/login-masyarakat.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+        ],
+
+        'login-petugas' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/petugas/login-petugas.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+        ],
+
+        'register-petugas' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/petugas/register-petugas.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+        ],
+
+        'delete-petugas' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/petugas/delete-petugas.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+        ],
+
+        'tanggapan' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/petugas/tanggapan.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+        ],
+
+        'buat-laporan' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/petugas/buat-laporan.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+        ],
+
+        'pengaduan' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/masyarakat/pengaduan.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+        ],
     ],
 
 ];

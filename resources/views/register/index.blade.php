@@ -1,91 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Register Masyarakat</title>
-        <link href="../assets/css/styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-    </head>
-    <body class="bg-primary">
-        <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
-                <main>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Buat Akun</h3></div>
-                                    <div class="card-body">
-                                        <form method="POST" action="/register" autocomplete="off">
-                                            @csrf
-                                            <div class="row mb-3">
-                                                <div class="col-md-4">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="nik" name="nik" type="number" maxlength="16" placeholder="NIK">
-                                                        <label for="nik">NIK</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-floating">
-                                                        <input class="form-control" id="nama" name="nama" type="text" placeholder="Nama" maxlength="35">
-                                                        <label for="nama">Nama</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-floating">
-                                                        <input class="form-control" id="username" name="username" type="text" placeholder="Username" maxlength="25">
-                                                        <label for="username">Username</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-floating mb-3">
 
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="password" name="password" type="password" placeholder="Password" maxlength="32">
-                                                        <label for="password">Password</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="telp" name="telp" type="number" placeholder="Nomor HP" maxlength="13">
-                                                        <label for="telp">Nomor HP</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mt-4 mb-0">
-                                                <div class="d-grid">
-                                                    <button type="submit" class="btn btn-primary btn-lock">Registrasi</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="/login">Sudah punya akun? Login!</a></div>
-                                    </div>
-                                </div>
-                            </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="This is a login page template based on Bootstrap 5">
+    <title>Registrasi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        .divider:after,
+        .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
+
+        .h-custom {
+            height: calc(100% - 73px);
+        }
+
+        @media (max-width: 450px) {
+            .h-custom {
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+@if ($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+@endif
+
+<body>
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                        class="img-fluid" alt="Sample image">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <form action="/register" method="POST" autocomplete="off">
+                        @csrf
+                        <div class="divider d-flex align-items-center my-4">
+                            <p class="text-center fw-bold mx-3 mb-0">Registrasi</p>
                         </div>
-                    </div>
-                </main>
-            </div>
-            <div id="layoutAuthentication_footer">
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="nik">NIK</label>
+                            <input type="number" name="nik" id="nik" class="form-control form-control-lg"
+                                placeholder="Masukkan NIK" maxlength="16" required>
                         </div>
-                    </div>
-                </footer>
+
+
+                        <!-- Email input -->
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="nama">Nama</label>
+                            <input type="text" name="nama" id="nama" class="form-control form-control-lg"
+                                placeholder="Masukkan nama" maxlength="35" required>
+                        </div>
+
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="telp">Nomor Telepon</label>
+                            <input type="number" name="telp" id="telp" class="form-control form-control-lg"
+                                placeholder="Masukkan Nomor Telepon" maxlength="13" required>
+                        </div>
+
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="username">Username</label>
+                            <input type="text" name="username" id="username"
+                                class="form-control form-control-lg" placeholder="Masukkan Username" maxlength="25" required>
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" name="password" id="password"
+                                class="form-control form-control-lg" placeholder="Masukkan Password" maxlength="32" required>
+                        </div>
+
+                        <div class="text-center text-lg-start mt-4 pt-2">
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
+                            <p class="small fw-bold mt-2 pt-1 mb-0">Sudah punya akun? <a href="/login"
+                                    class="link-danger">Login</a></p>
+                        </div>
+                        <div class="text-center text-lg-start mt-4 pt-2">
+
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="../assets/js/scripts.js"></script>
-    </body>
+    </section>
+</body>
+
 </html>

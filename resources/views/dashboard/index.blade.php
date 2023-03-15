@@ -2,6 +2,11 @@
 
 @section('content')
 <section>
+    @if ($message = Session::get('error'))
+        <div class="alert alert-danger mt-4">
+            <p>{{$message}}</p>
+        </div>
+    @endif
     <div class="row mt-4">
         <div class="col-xl-3 col-md-6">
             <div class="card bg-warning text-white text-center mb-4">

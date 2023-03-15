@@ -2,6 +2,11 @@
 
 @section('content')
 <section>
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success mt-4">
+            <p>{{$message}}</p>
+        </div>
+    @endif
     <h2 class="mt-4">LIST PENGADUAN</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4 mt-1">
         @foreach ($pengaduan as $p)
@@ -21,11 +26,14 @@
                 </h5>
                 <p class="text-muted mb-1">{{$p->tgl_pengaduan}}</p>
                 <p class="card-text">{{$p->isi_laporan}}</p>
-                <a href="{{route('pengaduan.kirimTanggapan')}}" class="btn btn-primary">Kirim Tanggapan</a>
+                <a href="{{ route('pengaduan.kirimTanggapan', $p->id_pengaduan) }}" class="btn btn-primary">Kirim Tanggapan</a>
               </div>
             </div>
           </div>
         @endforeach
+      </div>
+      <div class="position-absolute bottom-0 end-0 mx-5">
+        {{ $pengaduan->links() }}
       </div>
 </section>
 @endsection

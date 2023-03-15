@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengaduan;
+use App\Models\Tanggapan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class PengaduanController extends Controller
 {
@@ -31,6 +34,12 @@ class PengaduanController extends Controller
         }
         // dd($input);
         Pengaduan::create($input);
+        $requestId = Str::uuid();
+        Log::channel('pengaduan')->info(json_encode([
+            'id' => $requestId,
+            'method' => 'buat pengaduan',
+            'body' => $input,
+        ]));
         return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil dibuat!');
     }
 
@@ -56,15 +65,27 @@ class PengaduanController extends Controller
         } else {
             unset($input['foto']);
         }
+        $requestId = Str::uuid();
+        Log::channel('pengaduan')->info(json_encode([
+            'id' => $requestId,
+            'method' => 'update pengaduan',
+            'body' => $input,
+        ]));
         $pengaduan->update($input);
         return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil diedit!');
     }
 
     public function destroy(Pengaduan $pengaduan)
     {
-        if($pengaduan == 'ditolak')
+        if($pengaduan->status == 'ditolak')
         {
             $pengaduan->delete();
+            $requestId = Str::uuid();
+            Log::channel('pengaduan')->info(json_encode([
+                'id' => $requestId,
+                'method' => 'delete pengaduan',
+                'nik' => Auth::guard('masyarakat')->user()->nik
+            ]));
             return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil dihapus!');
         }else{
             return redirect()->route('pengaduan.index')->with('error', 'Pengaduan tidak dapat dihapus!');
@@ -79,6 +100,16 @@ class PengaduanController extends Controller
         return view('pengaduan.show', [
             'nik' => $nik,
             'pengaduan' => $pengaduan
+        ]);
+    }
+
+    public function kirimTanggapan($id_pengaduan)
+    {
+        $pengaduan = Pengaduan::where('id_pengaduan', $id_pengaduan)->first();
+        $tanggapan = Tanggapan::where('id_pengaduan', $id_pengaduan)->first();
+        return view('tanggapan.show', [
+            'pengaduan' => $pengaduan,
+            'tanggapan' => $tanggapan
         ]);
     }
 }

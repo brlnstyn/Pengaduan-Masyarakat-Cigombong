@@ -7,6 +7,8 @@ use App\Models\Masyarakat;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class MasyarakatController extends Controller
 {
@@ -40,6 +42,11 @@ class MasyarakatController extends Controller
             'password' => Hash::make($data['password']),
             'telp' => $data['telp']
         ]);
+        $requestId = Str::uuid();
+        Log::channel('register-masyarakat')->info(json_encode([
+            'id' => $requestId,
+            'body' => $input,
+        ]));
         // dd($input);
         return redirect('/login')->with('success', 'Registrasi berhasil! Silahkan login!');
     }
@@ -52,8 +59,20 @@ class MasyarakatController extends Controller
     public function auth(Request $request)
     {
         if(Auth::guard('masyarakat')->attempt(['username' => $request->username, 'password' => $request->password])){
+            $requestId = Str::uuid();
+            Log::channel('login-masyarakat')->info(json_encode([
+                'id' => $requestId,
+                'body' => 'username:' . $request->username,
+                'message' => 'Login berhasil!'
+            ]));
             return redirect()->route('pengaduan.index');
         }else{
+            $requestId = Str::uuid();
+            Log::channel('login-masyarakat')->info(json_encode([
+                'id' => $requestId,
+                'body' => 'username:' . $request->username,
+                'message' => 'Login gagal!'
+            ]));
             return redirect()->back()->with('error', 'Akun tidak terdaftar!');
         }
     }

@@ -7,6 +7,8 @@ use App\Models\Petugas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class PetugasController extends Controller
 {
@@ -35,6 +37,12 @@ class PetugasController extends Controller
         'telp' => $data['telp'],
         'level' => $data['level']
        ]);
+       $requestId = Str::uuid();
+       Log::channel('register-petugas')->info(json_encode([
+           'id' => $requestId,
+           'body' => $input,
+           'pembuat-akun' => Auth::guard('admin')->user()->nama_petugas
+       ]));
     //    dd($input);
        return redirect()->route('petugas.index')->with('success', 'Akun berhasil dibuat!');
     }
@@ -43,6 +51,12 @@ class PetugasController extends Controller
     {
         if(Auth::guard('admin')->user()->level == 'admin'){
             Petugas::where('id_petugas', $id_petugas)->delete();
+            $requestId = Str::uuid();
+            Log::channel('delete-petugas')->info(json_encode([
+                'id' => $requestId,
+                'function' => 'Delete Petugas dengan id: ' . $id_petugas,
+                'admin' => Auth::guard('admin')->user()->nama_petugas
+            ]));
             return redirect()->route('petugas.index')->with('success', 'Akun petugas berhasil dihapus!');
         }else{
             return redirect()->route('petugas.index')->with('error', 'Anda bukan admin!');
@@ -58,8 +72,20 @@ class PetugasController extends Controller
     public function authAdmin(Request $request)
     {
         if(Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])){
+            $requestId = Str::uuid();
+            Log::channel('login-petugas')->info(json_encode([
+                'id' => $requestId,
+                'body' => 'username:' . $request->username,
+                'message' => 'Login berhasil!'
+            ]));
             return redirect()->route('dashboard.index');
         }else{
+            $requestId = Str::uuid();
+            Log::channel('login-petugas')->info(json_encode([
+                'id' => $requestId,
+                'body' => 'username:' . $request->username,
+                'message' => 'Login gagal!'
+            ]));
             return redirect()->back()->with('error', 'Akun tidak terdaftar!');
         }
     }
