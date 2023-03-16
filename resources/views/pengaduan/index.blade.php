@@ -46,10 +46,10 @@
             <table id="datatablesSimple">
                 <thead>
                     <tr>
-                        <th>Tanggal Pengaduan</th>
-                        <th>Isi Laporan</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
+                        <th width="100px">Tanggal Pengaduan</th>
+                        <th width="200px">Isi Laporan</th>
+                        <th width="50px">Status</th>
+                        <th width="200px">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,12 +70,12 @@
                         </td>
                         <td>
                             <form action="{{route('pengaduan.destroy', $p->id_pengaduan)}}" method="POST">
-                                <a href="{{route('pengaduan.edit', $p->id_pengaduan)}}" class="btn btn-primary">Edit</a>
-                                <a href="{{route('pengaduan.show', $p->id_pengaduan)}}" class="btn btn-info">Detail</a>
+                                <a href="{{route('pengaduan.edit', $p->id_pengaduan)}}" class="btn btn-primary btn-sm mb-1"><i class="fas fa-pen"></i></a>
+                                <a href="{{route('pengaduan.show', $p->id_pengaduan)}}" class="btn btn-info btn-sm mb-1"><i class="fas fa-eye"></i></a>
 
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

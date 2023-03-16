@@ -24,7 +24,7 @@
     <div class="banner">
         <div class="container">
 
-            <h1 class="font-weight-bolder">Website Pengaduan Masyarakat Cigombong</h1>
+            <h1 class="font-weight-bolder">Website Pengaduan Masyarakat Desa Cigombong</h1>
             <h5 class="font-weight-normal text-muted pb-3 mt-4">Segera Laporkan hal-hal yang terjadi di
                 lingkungan Anda <br> kepada pihak yang berwenang!
             </h5>

@@ -14,11 +14,28 @@ class TanggapanController extends Controller
 {
     public function index()
     {
-        $pengaduan = DB::table('tbl_pengaduan')->paginate(6);
+        $pengaduan = DB::table('tbl_pengaduan')->orderBy('tgl_pengaduan', 'DESC')->paginate(6);
         return view('tanggapan.index', [
             'pengaduan' => $pengaduan,
         ]);
     }
+
+    public function cari(Request $request)
+	{
+		$cari = $request->cari;
+        if($cari === 'pending')
+        {
+            $cari = "0";
+            // dd($cari);
+        }
+        // dd($cari);
+		$pengaduan = DB::table('tbl_pengaduan')
+		->where('status','like',"%".$cari."%")
+		->paginate();
+        // dd($pengaduan);
+		return view('tanggapan.index',['pengaduan' => $pengaduan]);
+
+	}
 
     public function createOrUpdate(Request $request)
     {

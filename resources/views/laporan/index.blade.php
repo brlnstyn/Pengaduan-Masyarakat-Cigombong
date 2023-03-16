@@ -62,9 +62,9 @@
                                                 @elseif($p->status == 'proses')
                                                     <a href="" class="badge"
                                                         style="background-color: blue; text-decoration: none;">Proses</a>
-                                                @elseif($p->status == 'declined')
+                                                @elseif($p->status == 'ditolak')
                                                     <a href="" class="badge"
-                                                        style="background-color: red; text-decoration: none;">Declined</a>
+                                                        style="background-color: red; text-decoration: none;">Ditolak</a>
                                                 @else
                                                     <a href="" class="badge"
                                                         style="background-color: green; text-decoration: none;">Selesai</a>

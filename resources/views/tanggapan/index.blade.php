@@ -8,6 +8,17 @@
         </div>
     @endif
     <h2 class="mt-4">LIST PENGADUAN</h2>
+    <form action="/admin/tanggapan/cari" method="GET" autocomplete="">
+        @csrf
+        <div class="row">
+            <div class="col-md-8">
+                <input type="text" id="cari" name="cari" class="form-control" placeholder="Cari berdasarkan status pengaduan..." value="{{old('cari')}}">
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary btn-md">Cari Pengaduan</button>
+            </div>
+        </div>
+    </form>
     <div class="row row-cols-1 row-cols-md-3 g-4 mt-1">
         @foreach ($pengaduan as $p)
         <div class="col">
@@ -26,7 +37,9 @@
                 </h5>
                 <p class="text-muted mb-1">{{$p->tgl_pengaduan}}</p>
                 <p class="card-text">{{$p->isi_laporan}}</p>
-                <a href="{{ route('pengaduan.kirimTanggapan', $p->id_pengaduan) }}" class="btn btn-primary">Kirim Tanggapan</a>
+              </div>
+              <div class="card-footer">
+                <a href="{{ route('pengaduan.kirimTanggapan', $p->id_pengaduan) }}" class="btn btn-info">Kirim Tanggapan</a>
               </div>
             </div>
           </div>

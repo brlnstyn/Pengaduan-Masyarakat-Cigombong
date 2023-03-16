@@ -46,6 +46,7 @@ Route::prefix('admin')->group(function() {
         Route::delete('petugas/{id}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
 
         Route::get('tanggapan', [TanggapanController::class, 'index'])->name('tanggapan.index');
+        Route::get('tanggapan/cari', [TanggapanController::class, 'cari']);
         Route::post('tanggapan/createOrUpdate', [TanggapanController::class, 'createOrUpdate'])->name('tanggapan.createOrUpdate');
         Route::get('tanggapan/{id}', [PengaduanController::class, 'kirimTanggapan'])->name('pengaduan.kirimTanggapan');
 

@@ -72,7 +72,7 @@
                         <form action="{{route('petugas.destroy', $p->id_petugas)}}" method="POST">
                             @method('DELETE')
                             @csrf
-                            <button type="submit" class="btn btn-danger">Hapus</button>
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>

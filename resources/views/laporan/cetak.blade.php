@@ -14,7 +14,8 @@
 
 <body>
     <div class="text-center">
-        <h5>Laporan Pengaduan Masyarakat <br> {{ date('Y-m-d') }}</h5>
+        <h5>Laporan Pengaduan Masyarakat Desa Cigombong <br> {{ date('Y-m-d') }}</h5>
+        <p>Jalan Mayor Jendral HR.Edi Sukma No. 1 Telp 02518221328 <br> email: Keccigombong@bogorkab.go.id</p>
     </div>
     <div class="container">
         <table class="table table-bordered">
@@ -34,7 +35,7 @@
                         <td>{{ $p->nik }}</td>
                         <td>{{ $p->isi_laporan }}</td>
                         <td>{{ $p->tanggapan->tanggapan ?? '-' }}</td>
-                        <td>{{ $p->status == '0' ? 'Pending' : ucwords($p->status) }}</td>
+                        <td>{{ ucwords($p->status) }}</td>
                     </tr>
                 @endforeach
             </tbody>

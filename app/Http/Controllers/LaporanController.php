@@ -8,6 +8,7 @@ use \PDF;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LaporanController extends Controller
 {
@@ -28,7 +29,9 @@ class LaporanController extends Controller
 
     public function cetakLaporan($from, $to)
     {
-        $pengaduan = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->orderBy('tgl_pengaduan', 'DESC')->get();
+        $pengaduan = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->whereIn('status', ['proses', 'selesai', 'ditolak'])->orderBy('tgl_pengaduan', 'DESC')->get();
+        // $status = Pengaduan::whereIn('status', ['proses', 'selesai', 'ditolak'])->get();
+        // dd($status);
         $requestId = Str::uuid();
         Log::channel('buat-laporan')->info(json_encode([
             'id' => $requestId,
