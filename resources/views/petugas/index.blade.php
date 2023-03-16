@@ -15,6 +15,11 @@
 <div class="card mt-4">
     <div class="card-body">
         <h2>BUAT AKUN PETUGAS</h2>
+        @if ($message = Session::get('error'))
+            <div class="alert alert-danger">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
         <form class="row g-3" method="POST" action="{{route('petugas.store')}}">
             @csrf
             <div class="col-md-4">
@@ -31,7 +36,7 @@
               </div>
             <div class="col-md-6">
               <label for="telp" class="form-label">Nomor HP</label>
-              <input type="number" class="form-control" id="telp" name="telp" maxlength="13" maxlength="13" required>
+              <input type="number" class="form-control" id="telp" name="telp" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==13) return false;" required>
             </div>
             <div class="col-md-6">
                 <label for="level" class="form-label">Level</label>

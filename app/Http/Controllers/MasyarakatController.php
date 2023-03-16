@@ -35,20 +35,25 @@ class MasyarakatController extends Controller
             'password' =>'required',
             'telp' => 'required'
         ]);
-        $input = Masyarakat::create([
-            'nik' => $data['nik'],
-            'nama' => $data['nama'],
-            'username' => $data['username'],
-            'password' => Hash::make($data['password']),
-            'telp' => $data['telp']
-        ]);
-        $requestId = Str::uuid();
-        Log::channel('register-masyarakat')->info(json_encode([
-            'id' => $requestId,
-            'body' => $input,
-        ]));
-        // dd($input);
-        return redirect('/login')->with('success', 'Registrasi berhasil! Silahkan login!');
+
+        $username = Masyarakat::where('username', $data['username'])->first();
+        if($username){
+            return redirect()->back()->with('error', 'Username sudah terdaftar!');
+        }else{
+            $input = Masyarakat::create([
+                'nik' => $data['nik'],
+                'nama' => $data['nama'],
+                'username' => $data['username'],
+                'password' => Hash::make($data['password']),
+                'telp' => $data['telp']
+            ]);
+            $requestId = Str::uuid();
+            Log::channel('register-masyarakat')->info(json_encode([
+                'id' => $requestId,
+                'body' => $input,
+            ]));
+            return redirect('/login')->with('success', 'Registrasi berhasil! Silahkan login!');
+        }
     }
 
     public function login()

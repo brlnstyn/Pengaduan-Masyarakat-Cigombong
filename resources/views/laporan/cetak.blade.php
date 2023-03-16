@@ -14,18 +14,41 @@
 
 <body>
     <div class="text-center">
-        <h5>Laporan Pengaduan Masyarakat Desa Cigombong <br> {{ date('Y-m-d') }}</h5>
+        <h5>Laporan Pengaduan Masyarakat Desa Cigombong</h5>
+        <p class="text-bold">Periode: {{$from}} sampai {{$to}}</p>
         <p>Jalan Mayor Jendral HR.Edi Sukma No. 1 Telp 02518221328 <br> email: Keccigombong@bogorkab.go.id</p>
     </div>
-    <div class="container">
+    <div class="col-lg-12">
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Tanggal</th>
-                    <th>NIK</th>
+                    <th class="text-center">Pending</th>
+                    <th class="text-center">Proses</th>
+                    <th class="text-center">Selesai</th>
+                    <th class="text-center">Ditolak</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">{{$pending}}</td>
+                    <td class="text-center">{{$proses}}</td>
+                    <td class="text-center">{{$selesai}}</td>
+                    <td class="text-center">{{$ditolak}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tanggal Laporan</th>
+                    <th>NIK Pelapor</th>
+                    <th>Nama Pelapor</th>
                     <th>Isi Laporan</th>
-                    <th>Tanggapan</th>
                     <th>Status</th>
+                    <th>Tanggal Ditanggapi</th>
+                    <th>Tanggapan</th>
+                    <th>Nama Petugas</th>
+                    <th>Tanggal Selesai</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,9 +56,13 @@
                     <tr>
                         <td>{{ $p->tgl_pengaduan }}</td>
                         <td>{{ $p->nik }}</td>
+                        <td>{{ $p->masyarakat->nama }}</td>
                         <td>{{ $p->isi_laporan }}</td>
-                        <td>{{ $p->tanggapan->tanggapan ?? '-' }}</td>
                         <td>{{ ucwords($p->status) }}</td>
+                        <td>{{$p->tanggapan->tgl_tanggapan}}</td>
+                        <td>{{ $p->tanggapan->tanggapan ?? '-' }}</td>
+                        <td>{{$p->tanggapan->petugas->nama_petugas}}</td>
+                        <td>{{$p->tanggapan->tgl_selesai ?? "-"}}</td>
                     </tr>
                 @endforeach
             </tbody>

@@ -16,7 +16,7 @@ class CreateTblMasyarakatTable extends Migration
         Schema::create('tbl_masyarakat', function (Blueprint $table) {
             $table->char('nik', 16)->primary();
             $table->string('nama', 35);
-            $table->string('username', 26);
+            $table->string('username', 26)->unique();
             $table->string('password');
             $table->string('telp', 13);
             $table->timestamps();

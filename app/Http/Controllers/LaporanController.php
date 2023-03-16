@@ -19,6 +19,7 @@ class LaporanController extends Controller
 
     public function getLaporan(Request $request)
     {
+        // dd($request);
         $from = $request->from . ' ' . '00:00:00';
         $to = $request->to . ' ' . '23:59:59';
 
@@ -30,8 +31,11 @@ class LaporanController extends Controller
     public function cetakLaporan($from, $to)
     {
         $pengaduan = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->whereIn('status', ['proses', 'selesai', 'ditolak'])->orderBy('tgl_pengaduan', 'DESC')->get();
-        // $status = Pengaduan::whereIn('status', ['proses', 'selesai', 'ditolak'])->get();
-        // dd($status);
+        $pending = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->where('status', '0')->get()->count();
+        $proses = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->where('status', 'proses')->get()->count();
+        $selesai = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->where('status', 'selesai')->get()->count();
+        $ditolak = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->where('status', 'ditolak')->get()->count();
+        // dd($pending, $proses, $selesai, $ditolak);
         $requestId = Str::uuid();
         Log::channel('buat-laporan')->info(json_encode([
             'id' => $requestId,
@@ -39,7 +43,15 @@ class LaporanController extends Controller
             'body' => 'pembuat laporan: ' . Auth::guard('admin')->user()->nama_petugas,
         ]));
         // dd($pengaduan);
-        $pdf = PDF::loadView('laporan.cetak', ['pengaduan' => $pengaduan]);
+        $pdf = PDF::loadView('laporan.cetak', [
+            'pengaduan' => $pengaduan,
+            'pending' => $pending,
+            'proses' => $proses,
+            'selesai' => $selesai,
+            'ditolak' => $ditolak,
+            'from' => $from,
+            'to' => $to
+        ])->setPaper('a4', 'landscape');;
         return $pdf->download('laporan-pengaduan.pdf');
     }
 }

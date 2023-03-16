@@ -7,6 +7,7 @@ use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TanggapanController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PengaduanPublicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ Route::resource('pengaduan', PengaduanController::class);
 
 Route::get('register', [MasyarakatController::class, 'register']);
 Route::post('register', [MasyarakatController::class, 'store']);
+
+Route::get('daftar-pengaduan', [PengaduanPublicController::class, 'index']);
 
 Route::get('admin', [PetugasController::class, 'loginAdmin']);
 Route::post('admin', [PetugasController::class, 'authAdmin']);

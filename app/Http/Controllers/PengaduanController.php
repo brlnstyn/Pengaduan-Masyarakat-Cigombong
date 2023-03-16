@@ -87,6 +87,15 @@ class PengaduanController extends Controller
                 'nik' => Auth::guard('masyarakat')->user()->nik
             ]));
             return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil dihapus!');
+        }elseif($pengaduan->status == '0'){
+            $pengaduan->delete();
+            $requestId = Str::uuid();
+            Log::channel('pengaduan')->info(json_encode([
+                'id' => $requestId,
+                'method' => 'delete pengaduan',
+                'nik' => Auth::guard('masyarakat')->user()->nik
+            ]));
+            return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil dihapus!');
         }else{
             return redirect()->route('pengaduan.index')->with('error', 'Pengaduan tidak dapat dihapus!');
         }

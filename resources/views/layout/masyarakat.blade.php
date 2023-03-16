@@ -38,14 +38,18 @@
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav" id="sidenavAccordion" style="background-color: #152A38;"   >
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link text-white" href="/pengaduan">
+                            <a class="nav-link" href="/pengaduan">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 Pengaduan
                             </a>
                         </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        {{Auth::guard('masyarakat')->user()->nama}}
                     </div>
                 </nav>
             </div>

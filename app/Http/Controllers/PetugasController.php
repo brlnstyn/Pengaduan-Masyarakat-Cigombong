@@ -30,21 +30,24 @@ class PetugasController extends Controller
         'telp' => 'required',
         'level' => 'required'
        ]);
-       $input = Petugas::create([
-        'nama_petugas' => $data['nama_petugas'],
-        'username' => $data['username'],
-        'password' => Hash::make($data['password']),
-        'telp' => $data['telp'],
-        'level' => $data['level']
-       ]);
-       $requestId = Str::uuid();
-       Log::channel('register-petugas')->info(json_encode([
-           'id' => $requestId,
-           'body' => $input,
-           'pembuat-akun' => Auth::guard('admin')->user()->nama_petugas
-       ]));
-    //    dd($input);
-       return redirect()->route('petugas.index')->with('success', 'Akun berhasil dibuat!');
+       $username = Petugas::where('username', $data['username'])->first();
+        if($username){
+            return redirect()->back()->with('error', 'Username sudah terdaftar!');
+        }else{
+            $input = Petugas::create([
+                'nama_petugas' => $data['nama_petugas'],
+                'username' => $data['username'],
+                'password' => Hash::make($data['password']),
+                'telp' => $data['telp'],
+                'level' => $data['level']
+            ]);
+            $requestId = Str::uuid();
+            Log::channel('register-petugas')->info(json_encode([
+                'id' => $requestId,
+                'body' => $input,
+            ]));
+            return redirect()->route('petugas.index')->with('success', 'Registrasi berhasil! Silahkan login!');
+        }
     }
 
     public function destroy($id_petugas)

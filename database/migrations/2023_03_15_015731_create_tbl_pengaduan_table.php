@@ -19,6 +19,7 @@ class CreateTblPengaduanTable extends Migration
             $table->char('nik');
             $table->text('isi_laporan');
             $table->string('foto');
+            $table->enum('akses', ['public', 'private']);
             $table->enum('status', ['0', 'proses', 'selesai', 'ditolak']);
             $table->timestamps();
         });

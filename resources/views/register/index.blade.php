@@ -48,14 +48,17 @@
                         <div class="divider d-flex align-items-center my-4">
                             <p class="text-center fw-bold mx-3 mb-0">Registrasi</p>
                         </div>
+                        @if ($message = Session::get('error'))
+                        <div class="alert alert-danger">
+                            <p>{{ $message }}</p>
+                        </div>
+                        @endif
                         <!-- Email input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="nik">NIK</label>
                             <input type="number" name="nik" id="nik" class="form-control form-control-lg"
-                                placeholder="Masukkan NIK" maxlength="16" required>
+                                placeholder="Masukkan NIK" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==16) return false;" required>
                         </div>
-
-
                         <!-- Email input -->
                         <div class="form-outline mb-3">
                             <label class="form-label" for="nama">Nama</label>
@@ -67,7 +70,7 @@
                         <div class="form-outline mb-4">
                             <label class="form-label" for="telp">Nomor Telepon</label>
                             <input type="number" name="telp" id="telp" class="form-control form-control-lg"
-                                placeholder="Masukkan Nomor Telepon" maxlength="13" required>
+                                placeholder="Masukkan Nomor Telepon" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==13) return false;" required>
                         </div>
 
                         <!-- Email input -->

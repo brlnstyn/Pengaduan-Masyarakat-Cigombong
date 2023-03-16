@@ -17,18 +17,26 @@
             <h2>BUAT PENGADUAN</h2>
             <form class="row g-3" method="POST" action="{{route('pengaduan.store')}}" enctype="multipart/form-data">
                 @csrf
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="tgl_pengaduan" class="form-label">Tanggal Pengaduan</label>
                   <input type="date" class="form-control" id="tgl_pengaduan" name="tgl_pengaduan" value="{{date("Y-m-d")}}" readonly required>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="nik" class="form-label">NIk</label>
                   <input type="number" class="form-control" id="nik" name="nik" value="{{$nik}}" readonly required>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label for="foto" class="form-label">Foto</label>
                     <input type="file" class="form-control" id="foto" name="foto" required>
                   </div>
+                  <div class="col-md-3">
+                    <label for="akses" class="form-label">Akses</label>
+                    <select name="akses" id="akses" class="form-control">
+                        <option value="0" selected>--Pilih Hak Akses--</option>
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                    </select>
+                </div>
                 <div class="col-md-12">
                   <label for="isi_laporan" class="form-label">Isi Laporan</label>
                   <textarea name="isi_laporan" id="isi_laporan" cols="30" rows="5" class="form-control" required></textarea>
@@ -46,10 +54,11 @@
             <table id="datatablesSimple">
                 <thead>
                     <tr>
-                        <th width="100px">Tanggal Pengaduan</th>
-                        <th width="200px">Isi Laporan</th>
-                        <th width="50px">Status</th>
-                        <th width="200px">Aksi</th>
+                        <th>Tanggal Pengaduan</th>
+                        <th>Isi Laporan</th>
+                        <th>Akses</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,6 +66,7 @@
                     <tr>
                         <td>{{$p->tgl_pengaduan}}</td>
                         <td>{{$p->isi_laporan}}</td>
+                        <td>{{$p->akses}}</td>
                         <td>
                             @if($p->status == '0')
                             <span class="badge text-black" style="background-color: yellow">Pending</span>

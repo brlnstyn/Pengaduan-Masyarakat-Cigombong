@@ -18,6 +18,7 @@ class CreateTblTanggapanTable extends Migration
             $table->integer('id_pengaduan');
             $table->date('tgl_tanggapan');
             $table->text('tanggapan');
+            $table->date('tgl_selesai')->nullable();
             $table->integer('id_petugas');
             $table->timestamps();
         });

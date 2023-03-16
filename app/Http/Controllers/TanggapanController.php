@@ -14,7 +14,7 @@ class TanggapanController extends Controller
 {
     public function index()
     {
-        $pengaduan = DB::table('tbl_pengaduan')->orderBy('tgl_pengaduan', 'DESC')->paginate(6);
+        $pengaduan = DB::table('tbl_pengaduan')->orderBy('created_at', 'DESC')->paginate(6);
         return view('tanggapan.index', [
             'pengaduan' => $pengaduan,
         ]);
@@ -45,9 +45,14 @@ class TanggapanController extends Controller
             $pengaduan->update([
                 'status' => $request->status
             ]);
+            if($request->status == 'selesai'){
+                $tgl_selesai = date('Y-m-d');
+
+            }
             $input = $tanggapan->update([
                 'tgl_tanggapan' => date('Y-m-d'),
                 'tanggapan' => $request->tanggapan,
+                'tgl_selesai' => $tgl_selesai,
                 'id_petugas' => Auth::guard('admin')->user()->id_petugas,
             ]);
             $requestId = Str::uuid();
@@ -61,11 +66,16 @@ class TanggapanController extends Controller
             return redirect()->route('tanggapan.index', ['pengaduan' => $pengaduan, 'tanggapan' => $tanggapan])->with(['success' => 'Tanggapan berhasil dibuat!']);
         } else {
             $pengaduan->update(['status' => $request->status]);
-
+            if($request->status == 'selesai'){
+                $tgl_selesai = date('Y-m-d');
+            }else{
+                $tgl_selesai = null;
+            }
             $tanggapan = Tanggapan::create([
                 'id_pengaduan' => $request->id_pengaduan,
                 'tgl_tanggapan' => date('Y-m-d'),
                 'tanggapan' => $request->tanggapan,
+                'tgl_selesai' => $tgl_selesai,
                 'id_petugas' => Auth::guard('admin')->user()->id_petugas,
             ]);
             $requestId = Str::uuid();

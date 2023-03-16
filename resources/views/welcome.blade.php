@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Pengaduan Masyarakat</title>
+    <title>PENGADUAN MASYARAKAT</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -32,6 +32,7 @@
                 <a href="/login" type="button" class="btn btn-opacity-success mr-1 font-weight-bolder">Kirim
                     Pengaduan</a>
                 <a href="/register" type="button" class="btn btn-opacity-info mr-1 font-weight-bolder">Registrasi</a>
+                <a href="/daftar-pengaduan" type="button" class="btn btn-opacity-warning mr-1 font-weight-bolder">Daftar Pengaduan</a>
             </div>
             <img src="../landing/images/banner.png" alt="" class="img-fluid">
         </div>
